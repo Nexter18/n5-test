@@ -10,6 +10,22 @@ variable "environment" {
   default = "dev"
 }
 
+variable "acr_name" {
+  description = "Name of ACR"
+  type = string
+  default = "n5acrdevops"
+}
+
+variable "image_name" {
+  description = "Image name for this test"
+  type = string
+  default = "hello-nginx-custom" 
+}
+
+variable "image_tag"{ 
+  default = "latest"
+}
+
 variable "cluster_name" {
   description = "Name of the cluster"
   type = string
