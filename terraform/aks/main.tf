@@ -52,7 +52,7 @@ resource "null_resource" "docker_build_push" {
   provisioner "local-exec" {
     command = <<EOT
       az acr login --name ${data.azurerm_container_registry.acr.name}
-      docker build -f ../docker/Dockerfile -t ${data.azurerm_container_registry.acr.login_server}/${var.image_name}:${var.image_tag} ../docker
+      docker build -f ../../docker/Dockerfile -t ${data.azurerm_container_registry.acr.login_server}/${var.image_name}:${var.image_tag} ../../docker
       docker push ${data.azurerm_container_registry.acr.login_server}/${var.image_name}:${var.image_tag}
     EOT
   }
