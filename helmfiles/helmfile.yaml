@@ -1,0 +1,21 @@
+environments: 
+  dev:
+    values:
+      - environment: "dev"
+      - secrets:
+          n5secret: ref+azurekeyvault://n5test/dev-n5test-secret
+  stage:
+    values:
+      - environment: "stage"
+      - secrets:
+          n5secret: ref+azurekeyvault://n5test/stage-n5test-secret
+
+releases:
+  - name: n5test
+    namespace: n5test-{{ .Environent.Name }}
+    chart: ../chart/hello-chart
+    createNamespace: true
+    values:
+      - env:
+        ENVIRONMENT: {{ .Environment.Values.environment }}
+        N5SECRET: {{ .Environment.Values.secrets.n5secret | fetchSecretValue }}

@@ -1,0 +1,7 @@
+image:
+  repository: n5acrdevops.azurecr.io/hello-nginx-custom
+  tag: latest
+
+env:
+  ENVIRONMENT: ""
+  N5SECRET: ""
