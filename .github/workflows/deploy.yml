@@ -47,7 +47,9 @@ jobs:
        helm plugin install https://github.com/jkroepke/helm-secrets
 
    - name: 'Deploy Dev environment with Helmfile'
-     run: helmfile -e dev apply -f helmfiles/helmfile.yaml
+     working-directory: helmfiles
+     run: helmfile -e dev apply
 
    - name: 'Deploy Stage environment with Helmfile'
-     run: helmfile -e stage apply -f helmfiles/helmfile.yaml
+     working-directory: helmfiles
+     run: helmfile -e stage apply
