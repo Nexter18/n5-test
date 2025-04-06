@@ -1,9 +1,6 @@
 name: Apply infra and deploy
 
-on:
- push:
-  branches:
-   - main
+on: workflow_dispatch
 
 jobs:
  apply:
