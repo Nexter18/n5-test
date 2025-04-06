@@ -1,0 +1,48 @@
+name: Apply infra and deploy
+
+on:
+ push:
+  branches:
+   - main
+
+jobs:
+ apply:
+  runs-on: ubuntu-latest
+  
+ steps:
+  - uses: actions/checkout@v3
+        
+  - name: Azure Login
+    uses: azure/login@v1
+    with:
+     creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+  - name: Setup Terraform
+    uses: hashicorp/setup-terraform@v2
+
+  - name: Terraform init + plan
+    working-directory: terraform/aks
+    run: |
+      terraform init
+      terraform plan
+        
+  - name: Terraform apply
+    working-directory: terraform/aks
+    run: |
+      terraform apply -auto-approve
+
+  - name: Install Helmfile + plugins
+    run: |
+      sudo snap install helm --classic
+      curl -L https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 -o /usr/local/bin/helmfile
+      chmod +x /usr/local/bin/helmfile
+      helm plugin install https://github.com/jkroepke/helm-secrets
+
+  - name: Deploy Dev environment with Helmfile
+    run: helmfile -e dev apply -f helmfiles/helmfile.yaml
+
+  - name: Deploy Stage environment with Helmfile
+    run: helmfile -e stage apply -f helmfiles/helmfile.yaml
+
+    
+        
