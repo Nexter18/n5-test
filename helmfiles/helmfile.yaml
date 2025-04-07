@@ -17,5 +17,5 @@ releases:
     createNamespace: true
     values:
       - env:
-        ENVIRONMENT: {{ .Environment.Values.environment }}
-        N5SECRET: {{ .Environment.Values.secrets.n5secret | fetchSecretValue }}
+          ENVIRONMENT: {{ .Environment.Values.environment }}
+          N5SECRET: {{ .Environment.Values.secrets.n5secret | fetchSecretValue }}
