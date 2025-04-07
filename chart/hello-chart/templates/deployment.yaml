@@ -19,6 +19,6 @@ spec:
             - name: ENVIRONMENT
               value: {{ .Values.env.ENVIRONMENT | quote }}
             - name: N5SECRET
-              value: {{ .Vales.env.N5SECRET | quote }}
+              value: {{ .Values.env.N5SECRET | quote }}
           ports:
             - containerPort: 80
