@@ -44,6 +44,7 @@ jobs:
        sudo snap install helm --classic
        curl -L https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 -o /usr/local/bin/helmfile
        chmod +x /usr/local/bin/helmfile
+       helm plugin install https://github.com/databus23/helm-diff
        helm plugin install https://github.com/jkroepke/helm-secrets
 
    - name: 'Deploy Dev environment with Helmfile'
