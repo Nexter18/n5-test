@@ -58,6 +58,10 @@ jobs:
        helm plugin install https://github.com/databus23/helm-diff
        helm plugin install https://github.com/jkroepke/helm-secrets
 
+   - name: Debug Helmfile template output
+     working-directory: helmfiles
+     run: helmfile -e dev template
+
    - name: 'Deploy Dev environment with Helmfile'
      working-directory: helmfiles
      run: helmfile -e dev apply
