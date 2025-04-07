@@ -13,7 +13,7 @@ environments:
 releases:
   - name: n5test
     namespace: n5test-{{ .Environment.Name }}
-    chart: ../chart/hello-chart
+    chart: "{{ .Environment.Dir }}/../chart/hello-chart"
     createNamespace: true
     values:
       - env:
