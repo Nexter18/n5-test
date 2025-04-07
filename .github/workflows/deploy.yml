@@ -25,6 +25,17 @@ jobs:
      with:
       creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+   - name: Get AKS config
+     id: set-context
+     uses: azure/aks-set-context@v3
+     with:
+        resource-group: ${{ secrets.AKS_RESOURCE_GROUP }}
+        cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
+
+   - name: Setup kubectl
+     id: install-kubectl
+     uses: azure/setup-kubectl@v3
+
    - name: 'Setup Terraform'
      uses: hashicorp/setup-terraform@v2
 
